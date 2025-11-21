@@ -28,9 +28,6 @@ jobs:
               with:
                 incrementLevel: ${{ inputs.version }}
                 source: tags
-                tagprefix: "v"
-                createTag: true
-                pushTag: true
             
             - name: Echo
               run: echo ${{ steps.tagbump.outputs.nextVersion }}
