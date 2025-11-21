@@ -7,3 +7,6 @@ jobs:
     steps:
       - name: 1) Message de bienvenue
         run: echo "Bienvenue dans mon premier workflow GitHub Actions !"
+
+      - name: 2) Afficher la date du système
+        run: date
