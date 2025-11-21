@@ -23,6 +23,8 @@ jobs:
     artifact:
         runs-on: ubuntu-latest
         name: Create artifact
+        needs: lint
+        if: success()
         steps:
             - name: Checkout repository
               uses: actions/checkout@v5
