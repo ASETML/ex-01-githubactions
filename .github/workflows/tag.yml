@@ -19,12 +19,18 @@ jobs:
         steps:
             - name: Checkout code
               uses: actions/checkout@v5
+              with:
+                fetch-depth: 0
 
             - name: Tag
+              id: tagbump
               uses: flatherskevin/semver-action@v1
               with:
                 incrementLevel: ${{ inputs.version }}
                 source: tags
+                tagprefix: "v"
+                createTag: true
+                pushTag: true
             
             - name: Echo
-              run: echo ${{ steps.Tag.nextVersion }}
+              run: echo ${{ steps.tagbump.outputs.nextVersion }}
