@@ -5,13 +5,35 @@ jobs:
     lint:
         runs-on: ubuntu-latest
         name: Install node and lint
-        steps:  
-            - uses: actions/checkout@v5
-            - uses: actions/setup-node@v6
+        steps: 
+            - name: Checkout repository
+              uses: actions/checkout@v5
+
+            - name: Install node
+              uses: actions/setup-node@v6
               with:
                 node-version: 24
-            - run: |
+
+            - name: lint
+              run: |
                 cd app
                 npm i
                 npm run lint
             
+    artifact:
+        runs-on: ubuntu-latest
+        name: Create artifact
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v5
+
+            - name: Zip app
+              run: |
+                zip -r myapp.zip app
+
+            - name: Upload artifact
+              uses: actions/upload-artificat@v4
+              with:
+                name: myapp
+                path: myapp.zip
+
