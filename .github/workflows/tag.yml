@@ -1,0 +1,28 @@
+name: Increment version number
+on: 
+    workflow_dispatch:
+        inputs:
+            version:
+                description: How the version will be bumped
+                required: true
+                default: minor
+                type: choice
+                options:
+                - major
+                - minor
+                - patch
+jobs:
+    bump:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v5
+
+            - name: Tag
+              uses: flatherskevin/semver-action@v1
+              with:
+                incrementLevel: ${{ inputs.version }}
+                source: tags
+            
+            - name: Echo
+              run: echo ${{ steps.Tag.nextVersion }}
