@@ -28,6 +28,8 @@ jobs:
               with:
                 incrementLevel: ${{ inputs.version }}
                 source: tags
-            
-            - name: Echo
-              run: echo ${{ steps.tagbump.outputs.nextVersion }}
+
+            - name: Create and push tag
+              run: |
+                git tag ${{ steps.tagbump.outputs.nextVersion }}
+                git push origin ${{ steps.tagbump.outputs.nextVersion }}
